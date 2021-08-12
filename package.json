@@ -1,0 +1,86 @@
+{
+  "name": "@theorylabs/typeof",
+  "version": "0.0.1",
+  "description": "Get all your type checking goodness, without the fluff. All in Vanilla JS. What 'typeof <THING>' should be.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheoryLabs/TypeOf.git"
+  },
+  "author": "Branden Dane <Dane@TheoryLabs.dev> (https//TheoryLabs.dev)",
+  "license": "MIT",
+  "homepage": "https://github.com/TheoryLabs/TypeOf#README",
+  "bugs": "https://github.com/TheoryLabs/TypeOf/issues",
+  "files": [
+    "dist",
+    "dist/",
+    "dist/*.{js}",
+    "dist/**/*.{js}"
+  ],
+  "flat": true,
+  "private": false,
+  "keywords": [
+    "typeof",
+    "types",
+    "theorylabs",
+    "typecheck"
+  ],
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "source": "./src/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "scripts": {
+    "clean:dist": "rimraf \"dist\"",
+    "clean:yarn-lock": "rimraf \"*.lock\"",
+    "clean:npm-lock": "rimraf \"*-lock.json\"",
+    "clean:error-log": "rimraf \"*-error.log\"",
+    "clean:node": "rimraf \"node_modules\"",
+    "purge": "yarn clean:dist && yarn clean:npm-lock && yarn clean:yarn-lock && yarn clean:error-log && yarn clean:node",
+    "reset": "yarn purge && yarn install --force",
+    "dev": "NODE_ENV='development' DEV_WATCHER='development' yarn dev:build",
+    "examples:require-lib": "NODE_ENV='development' node ./examples/requireLib.js",
+    "examples:import-lib": "NODE_ENV='development' node -r esm ./examples/importLib.js",
+    "test": "echo \"No test specified\"",
+    "build:esm": "NODE_ENV='production' DEV_WATCHER=false node -r esm ./scripts/build-esm.js",
+    "build:cjs": "NODE_ENV='production' DEV_WATCHER=false node -r esm ./scripts/build-cjs.js",
+    "dev:esm": "NODE_ENV='development' DEV_WATCHER='development' node -r esm ./scripts/build-esm.js",
+    "dev:cjs": "NODE_ENV='development' DEV_WATCHER='development' node -r esm ./scripts/build-cjs.js",
+    "dev:build": "yarn dev:esm && yarn dev:cjs",
+    "build:lib-name": "node -r esm ./scripts/lib-name.js",
+    "build:project-manifest": "node -r esm ./scripts/project-manifest.js",
+    "build": "yarn build:esm && yarn build:cjs",
+    "deploy:prep-lib": "echo 'TODO'",
+    "deploy:prep-repository": "echo 'TODO'",
+    "deploy:prep-registry": "echo 'TODO'",
+    "deploy:prod": "yarn reset && yarn build",
+    "deploy": "yarn publish --access public",
+    "preversion": "yarn test",
+    "prepublishOnly": "yarn build"
+  },
+  "devDependencies": {
+    "@pnpm/read-project-manifest": "^2.0.5",
+    "@yarnpkg/esbuild-plugin-pnp": "^1.0.0",
+    "esbuild": "^0.12.17",
+    "esbuild-node-builtins": "^0.1.0",
+    "esbuild-plugin-lodash": "^1.0.4",
+    "esbuild-plugin-manifest": "^0.4.6",
+    "esbuild-plugin-raw": "^0.1.4",
+    "esm": "^3.2.25",
+    "rimraf": "^3.0.2"
+  },
+  "sideEffects": false,
+  "resolutions": {
+    "tslib": "2.3.0",
+    "punycode": "2.1.1",
+    "readable-stream": "2.0.2",
+    "string_decoder": "1.3.0",
+    "safe-buffer": "5.2.1",
+    "bn.js": "5.2.0",
+    "isarray": "1.0.0",
+    "process-nextick-args": "2.0.1"
+  }
+}
